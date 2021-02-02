@@ -1,7 +1,7 @@
-name: "LPMP_NMP"
+name: "LPMP-NMP Analysis"
 output_dir: ../docs
 navbar:
-  title: "LPMP_NMP"
+  title: "LPMP-NMP Analysis"
   left:
   - text: Home
     href: index.html
@@ -9,6 +9,16 @@ navbar:
     href: about.html
   - text: License
     href: license.html
+  - text: Analysis
+    menu:
+      - text: Batch integration
+      - href: 01-batch-integration.html
+      - text: Atlas integration
+      - href: 02-atlas-integration.html
+      - text: Human integration
+      - href: 03-human-integration.html
+  - text: Interactive
+    href: interactive.html
 output:
   workflowr::wflow_html:
     toc: yes
