@@ -193,7 +193,7 @@ idx <- c(idx$sample, "LPMP_LHF", "LPMP_EHF", "NMP_EHF")
 Correct experiments using nearest neighbours:
 
 ```{r}
-set.seed(692066530)
+set.seed(1111001101)
 
 mnn <- correctExperiments(
   all,
@@ -280,7 +280,7 @@ pheatmap(tab[, idx], color = col, display_numbers = TRUE, number_format = "%d", 
 Perform TSNE on the corrected PCA matrix:
 
 ```{r}
-set.seed(42)
+set.seed(1101111001)
 
 mnn <- runTSNE(mnn, dimred = "corrected", perplexity = 120) # same settings as reference analysis
 ```
@@ -300,7 +300,7 @@ ggcells(mnn, aes(TSNE.1, TSNE.2, colour = celltype)) +
 Perform UMAP on the corrected PCA matrix:
 
 ```{r}
-set.seed(42)
+set.seed(0010111101)
 
 mnn <- runUMAP(mnn, dimred = "corrected", n_neighbors = 20, min_dist = 0.7) # same settings as reference analysis
 ```
