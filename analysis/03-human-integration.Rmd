@@ -354,7 +354,7 @@ mnn <- runUMAP(mnn, dimred = "corrected", n_neighbors = 15, min_dist = 0.5) # sa
 
 Visualize the corrected PCA using a UMAP plot:
 
-```{r fig.height=6, fig.width=8}
+```{r fig.width = 18, fig.height = 18}
 dat <- makePerCellDF(mnn, use.coldata = TRUE, use.dimred = "UMAP")
 
 dat$Cluster[dat$Sample != "Human"] <- NA # ignore mouse clusters
