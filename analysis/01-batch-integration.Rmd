@@ -231,7 +231,7 @@ mnn <- runTSNE(mnn, dimred = "corrected")
 
 Visualize the corrected PCA using a TSNE plot:
 
-```{r fig.width = 9, fig.height = 9}
+```{r fig.width = 8, fig.height = 6}
 ggcells(mnn, aes(TSNE.1, TSNE.2, colour = celltype)) +
   geom_point(size = 1, show.legend = FALSE) +
   scale_colour_manual(values = MouseGastrulationData::EmbryoCelltypeColours, na.value = "#000000") +
@@ -251,7 +251,7 @@ mnn <- runUMAP(mnn, dimred = "corrected")
 
 Visualize the corrected PCA using a UMAP plot:
 
-```{r fig.width = 9, fig.height = 9}
+```{r fig.width = 8, fig.height = 6}
 ggcells(mnn, aes(UMAP.1, UMAP.2, colour = celltype)) +
   geom_point(size = 1, show.legend = FALSE) +
   scale_colour_manual(values = MouseGastrulationData::EmbryoCelltypeColours, na.value = "#000000") +
