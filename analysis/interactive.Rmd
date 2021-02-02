@@ -124,8 +124,21 @@ boolean_colours <- function(n) {
   c("TRUE" = "#E15759", "FALSE" = "#BAB0AC")
 }
 
+# Create colour map
+ecm <- ExperimentColorMap(
+  colData = list(
+    celltype = celltype_colours,
+    Etv2 = boolean_colours,
+    Kdr = boolean_colours,
+    Runx1 = boolean_colours,
+    Ednrb = boolean_colours,
+    Etv2_AND_Kdr = boolean_colours,
+    Etv2_AND_Kdr_AND_Runx1 = boolean_colours,
+    Etv2_AND_Ednrb = boolean_colours
+  )
+)
+
 # Create iSEE object
-ecm <- ExperimentColorMap(colData = list(celltype = celltype_colours), global_discrete = boolean_colours)
 iSEE(sce, appTitle = "LPMP_NMP", colormap = ecm)
 ```
 
@@ -140,8 +153,6 @@ Allocate more memory to the iSEE application:
 ```{r}
 configureApp(appName = "LPMP_NMP", appDir = "shiny/batch", size = "xxlarge")
 ```
-
-### Atlas data
 
 ### Human data
 
@@ -181,39 +192,6 @@ sce$Etv2_AND_Kdr_AND_Runx1 <- sce$Etv2_AND_Kdr & sce$Runx1
 sce$Etv2_AND_Ednrb <- sce$Etv2 & sce$Ednrb
 
 # Define column data colours
-sample_colours <- function(n) {
-  c(
-    "Human" = "#BAB0AC",
-    "NMP_EHF" = "#4E79A7",
-    "LPMP_EHF" = "#E15759",
-    "LPMP_LHF" = "#EDC948"
-  )
-}
-
-cluster_colours <- function(n) {
-  c(
-    "Epiblast" = "#3D7AB0",
-    "Ectoderm" = "#4FC0CB",
-    "Primitive Streak" = "#A6BEDF",
-    "Nascent Mesoderm" = "#C67DB4",
-    "Axial Mesoderm" = "#7B534D",
-    "Emergent Mesoderm" = "#ABB973",
-    "Endoderm" = "#F28941",
-    "Advanced Mesoderm" = "#4F9E74",
-    "YS Mesoderm" = "#FAB781",
-    "Hemogenic Endothelial Progenitors" = "#6A59A6",
-    "Erythrocytes" = "#C5433E"
-  )
-}
-
-origin_colours <- function(n) {
-  c(
-    "Caudal" = "#4DAF4A",
-    "Rostral" = "#377EB8",
-    "Yolk Sac" = "#FF7F00"
-  )
-}
-
 boolean_colours <- function(n) {
   c(
     "TRUE" = "#E15759",
@@ -221,8 +199,20 @@ boolean_colours <- function(n) {
   )
 }
 
+# Create colour map
+ecm <- ExperimentColorMap(
+  colData = list(
+    Etv2 = boolean_colours,
+    Kdr = boolean_colours,
+    Runx1 = boolean_colours,
+    Ednrb = boolean_colours,
+    Etv2_AND_Kdr = boolean_colours,
+    Etv2_AND_Kdr_AND_Runx1 = boolean_colours,
+    Etv2_AND_Ednrb = boolean_colours
+  )
+)
+
 # Create iSEE object
-ecm <- ExperimentColorMap(colData = list(Sample = sample_colours, Cluster = cluster_colours, Origin = origin_colours), global_discrete = boolean_colours)
 iSEE(sce, appTitle = "LPMP_NMP_HUMAN", colormap = ecm)
 ```
 
