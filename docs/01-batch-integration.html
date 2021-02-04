@@ -27,6 +27,10 @@
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
+<script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
 
 <link rel="icon" href="https://github.com/workflowr/workflowr-assets/raw/master/img/reproducible.png">
 <!-- Add a small amount of space between sections. -->
@@ -365,7 +369,7 @@ div.tocify {
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="index.html">LPMP-NMP Analysis</a>
+      <a class="navbar-brand" href="index.html">LPMP NMP Analysis</a>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
@@ -375,9 +379,6 @@ div.tocify {
 <li>
   <a href="about.html">About</a>
 </li>
-<li>
-  <a href="license.html">License</a>
-</li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
     Analysis
@@ -385,17 +386,14 @@ div.tocify {
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
-    <li class="dropdown-header">Batch integration</li>
     <li>
-      <a href="01-batch-integration.html"></a>
+      <a href="01-batch-integration.html">Batch integration</a>
     </li>
-    <li class="dropdown-header">Atlas integration</li>
     <li>
-      <a href="02-atlas-integration.html"></a>
+      <a href="02-atlas-integration.html">Atlas integration</a>
     </li>
-    <li class="dropdown-header">Human integration</li>
     <li>
-      <a href="03-human-integration.html"></a>
+      <a href="03-human-integration.html">Human integration</a>
     </li>
   </ul>
 </li>
@@ -404,7 +402,15 @@ div.tocify {
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        
+        <li>
+  <a href="license.html">License</a>
+</li>
+<li>
+  <a href="https://github.com/jma1991/LPMP_NMP">
+    <span class="fab fa-github"></span>
+     
+  </a>
+</li>
       </ul>
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
@@ -416,7 +422,7 @@ div.tocify {
 
 <h1 class="title toc-ignore">Batch integration</h1>
 <h4 class="author">James Ashmore</h4>
-<h4 class="date">02 February, 2021</h4>
+<h4 class="date">04 February, 2021</h4>
 
 </div>
 
@@ -441,7 +447,7 @@ div.tocify {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2021-02-02
+<strong>Last updated:</strong> 2021-02-04
 </p>
 <p>
 <strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
@@ -532,16 +538,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomjma1991LPMPNMPtreedd8e14a4481d8e0142c1432b53f31607cb477fdatargetblankdd8e14aa"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/jma1991/LPMP_NMP/tree/dd8e14a4481d8e0142c1432b53f31607cb477fda" target="_blank">dd8e14a</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomjma1991LPMPNMPtreeae150877635ac0196e399409819809f9dff0e152targetblankae15087a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/jma1991/LPMP_NMP/tree/ae150877635ac0196e399409819809f9dff0e152" target="_blank">ae15087</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomjma1991LPMPNMPtreedd8e14a4481d8e0142c1432b53f31607cb477fdatargetblankdd8e14aa" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomjma1991LPMPNMPtreeae150877635ac0196e399409819809f9dff0e152targetblankae15087a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/jma1991/LPMP_NMP/tree/dd8e14a4481d8e0142c1432b53f31607cb477fda" target="_blank">dd8e14a</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/jma1991/LPMP_NMP/tree/ae150877635ac0196e399409819809f9dff0e152" target="_blank">ae15087</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -552,22 +558,11 @@ Ignored files:
     Ignored:    .Rhistory
     Ignored:    .Rproj.user/
     Ignored:    analysis/cache/
-    Ignored:    data/.DS_Store
-    Ignored:    data/HumanGastrulationData.rds
-    Ignored:    data/LPMP_EHF.rds
-    Ignored:    data/LPMP_LHF.rds
-    Ignored:    data/NMP_EHF.rds
-    Ignored:    data/blacklist.csv
-    Ignored:    data/hsapiens_mmusculus.csv
-    Ignored:    output/01-batch-integration.rds
-    Ignored:    output/02-atlas-integration.rds
-    Ignored:    output/03-human-integration.rds
-
-Untracked files:
-    Untracked:  analysis/interactive.Rmd
+    Ignored:    renv/
+    Ignored:    shiny/
 
 Unstaged changes:
-    Modified:   _workflowr.yml
+    Modified:   _workflowr.R
     Modified:   analysis/_site.yml
 
 </code></pre>
@@ -607,6 +602,23 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/jma1991/LPMP_NMP/99c02a83402aa2f6f29dbec4000a73c621935ac1/docs/01-batch-integration.html" target="_blank">99c02a8</a>
+</td>
+<td>
+James Ashmore
+</td>
+<td>
+2021-02-02
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -899,7 +911,7 @@ locale:
 [1] en_GB.UTF-8/en_GB.UTF-8/en_GB.UTF-8/C/en_GB.UTF-8/en_GB.UTF-8
 
 attached base packages:
-[1] stats4    parallel  stats     graphics  grDevices utils     datasets 
+[1] stats4    parallel  stats     graphics  grDevices datasets  utils    
 [8] methods   base     
 
 other attached packages:
@@ -943,8 +955,8 @@ loaded via a namespace (and not attached):
  [47] uwot_0.1.10                   dbplyr_2.0.0                 
  [49] locfit_1.5-9.4                labeling_0.4.2               
  [51] tidyselect_1.1.0              rlang_0.4.10                 
- [53] later_1.1.0.1                 munsell_0.5.0                
- [55] BiocVersion_3.12.0            tools_4.0.2                  
+ [53] later_1.1.0.1                 BiocVersion_3.12.0           
+ [55] munsell_0.5.0                 tools_4.0.2                  
  [57] cachem_1.0.1                  generics_0.1.0               
  [59] RSQLite_2.2.3                 ExperimentHub_1.16.0         
  [61] evaluate_0.14                 stringr_1.4.0                
@@ -952,30 +964,31 @@ loaded via a namespace (and not attached):
  [65] knitr_1.30                    bit64_4.0.5                  
  [67] fs_1.5.0                      purrr_0.3.4                  
  [69] sparseMatrixStats_1.2.0       mime_0.9                     
- [71] xml2_1.3.2                    biomaRt_2.46.1               
- [73] compiler_4.0.2                rstudioapi_0.13              
- [75] beeswarm_0.2.3                curl_4.3                     
- [77] interactiveDisplayBase_1.28.0 tibble_3.0.5                 
- [79] statmod_1.4.35                tweenr_1.0.1                 
- [81] stringi_1.5.3                 RSpectra_0.16-0              
- [83] lattice_0.20-41               bluster_1.0.0                
- [85] ProtGenerics_1.22.0           Matrix_1.3-2                 
- [87] vctrs_0.3.6                   pillar_1.4.7                 
- [89] lifecycle_0.2.0               BiocManager_1.30.10          
- [91] BiocNeighbors_1.8.2           bitops_1.0-6                 
- [93] irlba_2.3.3                   MouseGastrulationData_1.4.0  
- [95] httpuv_1.5.5                  rtracklayer_1.50.0           
- [97] R6_2.5.0                      promises_1.1.1               
- [99] gridExtra_2.3                 vipor_0.4.5                  
-[101] codetools_0.2-18              MASS_7.3-53                  
-[103] assertthat_0.2.1              openssl_1.4.3                
-[105] rprojroot_2.0.2               withr_2.4.1                  
-[107] GenomicAlignments_1.26.0      Rsamtools_2.6.0              
-[109] GenomeInfoDbData_1.2.4        hms_1.0.0                    
-[111] grid_4.0.2                    beachmat_2.6.4               
-[113] rmarkdown_2.6                 DelayedMatrixStats_1.12.2    
-[115] Rtsne_0.15                    git2r_0.28.0                 
-[117] shiny_1.6.0                   ggbeeswarm_0.6.0             </code></pre>
+ [71] whisker_0.4                   xml2_1.3.2                   
+ [73] biomaRt_2.46.1                compiler_4.0.2               
+ [75] rstudioapi_0.13               interactiveDisplayBase_1.28.0
+ [77] beeswarm_0.2.3                curl_4.3                     
+ [79] tibble_3.0.5                  statmod_1.4.35               
+ [81] tweenr_1.0.1                  stringi_1.5.3                
+ [83] RSpectra_0.16-0               lattice_0.20-41              
+ [85] bluster_1.0.0                 ProtGenerics_1.22.0          
+ [87] Matrix_1.3-2                  vctrs_0.3.6                  
+ [89] pillar_1.4.7                  lifecycle_0.2.0              
+ [91] BiocManager_1.30.10           BiocNeighbors_1.8.2          
+ [93] bitops_1.0-6                  irlba_2.3.3                  
+ [95] MouseGastrulationData_1.4.0   httpuv_1.5.5                 
+ [97] rtracklayer_1.50.0            R6_2.5.0                     
+ [99] promises_1.1.1                renv_0.12.5                  
+[101] gridExtra_2.3                 vipor_0.4.5                  
+[103] codetools_0.2-18              MASS_7.3-53                  
+[105] assertthat_0.2.1              openssl_1.4.3                
+[107] rprojroot_2.0.2               withr_2.4.1                  
+[109] GenomicAlignments_1.26.0      Rsamtools_2.6.0              
+[111] GenomeInfoDbData_1.2.4        hms_1.0.0                    
+[113] grid_4.0.2                    beachmat_2.6.4               
+[115] rmarkdown_2.6                 DelayedMatrixStats_1.12.2    
+[117] git2r_0.28.0                  shiny_1.6.0                  
+[119] ggbeeswarm_0.6.0             </code></pre>
 </div>
 </div>
 
