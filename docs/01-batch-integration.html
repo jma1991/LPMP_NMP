@@ -556,16 +556,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomjma1991LPMPNMPtree3827582569313da0592b6307e143e2adf08159b9targetblank3827582a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/jma1991/LPMP_NMP/tree/3827582569313da0592b6307e143e2adf08159b9" target="_blank">3827582</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomjma1991LPMPNMPtree729ee938eb8288bf892adccfe41aa1fc48a287a3targetblank729ee93a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/jma1991/LPMP_NMP/tree/729ee938eb8288bf892adccfe41aa1fc48a287a3" target="_blank">729ee93</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomjma1991LPMPNMPtree3827582569313da0592b6307e143e2adf08159b9targetblank3827582a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomjma1991LPMPNMPtree729ee938eb8288bf892adccfe41aa1fc48a287a3targetblank729ee93a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/jma1991/LPMP_NMP/tree/3827582569313da0592b6307e143e2adf08159b9" target="_blank">3827582</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/jma1991/LPMP_NMP/tree/729ee938eb8288bf892adccfe41aa1fc48a287a3" target="_blank">729ee93</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -620,6 +620,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/jma1991/LPMP_NMP/blob/729ee938eb8288bf892adccfe41aa1fc48a287a3/analysis/01-batch-integration.Rmd" target="_blank">729ee93</a>
+</td>
+<td>
+James Ashmore
+</td>
+<td>
+2021-02-12
+</td>
+<td>
+Build
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/jma1991/LPMP_NMP/9be6cb1e613a483c4ed77aceaa58de108353b44f/docs/01-batch-integration.html" target="_blank">9be6cb1</a>
+</td>
+<td>
+James Ashmore
+</td>
+<td>
+2021-02-12
+</td>
+<td>
+Build
+</td>
+</tr>
 <tr>
 <td>
 html
@@ -1078,6 +1112,8 @@ library(scuttle)</code></pre>
 <p>Load CRAN packages:</p>
 <pre class="r"><code>library(ggforce)
 library(pheatmap)</code></pre>
+<p>Source user functions:</p>
+<pre class="r"><code>source(&quot;code/splitByCol.R&quot;)</code></pre>
 </div>
 <div id="data" class="section level2">
 <h2>Data</h2>
@@ -1133,7 +1169,9 @@ sce &lt;- lapply(sce, &quot;[&quot;, i = ids)</code></pre>
 <div id="variance-modelling" class="section level3">
 <h3>Variance modelling</h3>
 <p>Model the per-gene variance:</p>
-<pre class="r"><code>dec &lt;- lapply(sce, modelGeneVarWithSpikes, &quot;ERCC&quot;)</code></pre>
+<pre class="r"><code>dec &lt;- lapply(sce, function(x) modelGeneVarWithSpikes(x, spikes = &quot;ERCC&quot;, block = x$phase))
+
+#dec &lt;- lapply(sce, modelGeneVarWithSpikes, &quot;ERCC&quot;)</code></pre>
 <p>Combine variance decompositions:</p>
 <pre class="r"><code>dec &lt;- do.call(combineVar, dec)</code></pre>
 </div>
@@ -1155,6 +1193,10 @@ hvg &lt;- getTopHVGs(dec, var.field = &quot;bio&quot;, var.threshold = 0, fdr.fi
 </div>
 <div id="batch-integration" class="section level3">
 <h3>Batch integration</h3>
+<p>Split each batch by phase:</p>
+<pre class="r"><code>sce &lt;- lapply(sce, function(x) splitByCol(x, x$phase))</code></pre>
+<p>Flatten nested list of objects:</p>
+<pre class="r"><code>sce &lt;- lapply(rapply(sce, enquote, how = &quot;unlist&quot;), eval)</code></pre>
 <p>Correct experiments using nearest neighbours:</p>
 <pre class="r"><code>set.seed(0001011110)
 
@@ -1181,193 +1223,9 @@ rowData(mnn)$gene_name &lt;- mapIds(EnsDb.Mmusculus.v79, keys = rownames(mnn), c
 
 col &lt;- colorRampPalette(RColorBrewer::brewer.pal(n = 5, name = &quot;Reds&quot;))(100)
 
-brk &lt;- seq(0, max(var), length.out = 101)
+brk &lt;- seq(0, max(var, na.rm = TRUE), length.out = 101)
 
 pheatmap(var, color = col, display_numbers = TRUE, number_format = &quot;%.2f&quot;, cluster_cols = FALSE, cluster_rows = FALSE, angle_col = 0)</code></pre>
-<p><img src="figure/01-batch-integration.Rmd/unnamed-chunk-17-1.png" width="100%" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-17-1">
-Past versions of unnamed-chunk-17-1.png
-</button>
-</p>
-<div id="fig-unnamed-chunk-17-1" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/jma1991/LPMP_NMP/blob/a5d4ca9c783bc5c9644a505f387be819d6fa7480/docs/figure/01-batch-integration.Rmd/unnamed-chunk-17-1.png" target="_blank">a5d4ca9</a>
-</td>
-<td>
-James Ashmore
-</td>
-<td>
-2021-02-12
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/jma1991/LPMP_NMP/blob/5ea296e7bcf046b2d395bae2689a126cf6281445/docs/figure/01-batch-integration.Rmd/unnamed-chunk-17-1.png" target="_blank">5ea296e</a>
-</td>
-<td>
-James Ashmore
-</td>
-<td>
-2021-02-12
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/jma1991/LPMP_NMP/blob/ff606967f8dfe04a0a1f6e6fed8fa859b78c2b74/docs/figure/01-batch-integration.Rmd/unnamed-chunk-17-1.png" target="_blank">ff60696</a>
-</td>
-<td>
-James Ashmore
-</td>
-<td>
-2021-02-12
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/jma1991/LPMP_NMP/blob/a9d2df432c827ccbd61a2fee4c357122b91a3e0a/docs/figure/01-batch-integration.Rmd/unnamed-chunk-17-1.png" target="_blank">a9d2df4</a>
-</td>
-<td>
-James Ashmore
-</td>
-<td>
-2021-02-12
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/jma1991/LPMP_NMP/blob/ce6499cd3b7b34f2ba5a9aadbc7a5590d0219134/docs/figure/01-batch-integration.Rmd/unnamed-chunk-17-1.png" target="_blank">ce6499c</a>
-</td>
-<td>
-James Ashmore
-</td>
-<td>
-2021-02-12
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<p>Cluster on the corrected PCA to obtain a partitioning of the cells:</p>
-<pre class="r"><code>snn &lt;- buildSNNGraph(mnn, type = &quot;jaccard&quot;, use.dimred = &quot;corrected&quot;)
-
-com &lt;- igraph::cluster_louvain(snn)</code></pre>
-<p>Tabulate number of cells from multiple batches within each cluster:</p>
-<pre class="r"><code>tab &lt;- table(Cluster = com$membership, Batch = mnn$batch)
-
-col &lt;- colorRampPalette(RColorBrewer::brewer.pal(n = 5, name = &quot;Blues&quot;))(100)
-
-brk &lt;- seq(0, max(tab), length.out = 101)
-
-pheatmap(tab, color = col, display_numbers = TRUE, number_format = &quot;%d&quot;, cluster_cols = FALSE, cluster_rows = FALSE, angle_col = 0)</code></pre>
-<p><img src="figure/01-batch-integration.Rmd/unnamed-chunk-19-1.png" width="100%" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-19-1">
-Past versions of unnamed-chunk-19-1.png
-</button>
-</p>
-<div id="fig-unnamed-chunk-19-1" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/jma1991/LPMP_NMP/blob/a5d4ca9c783bc5c9644a505f387be819d6fa7480/docs/figure/01-batch-integration.Rmd/unnamed-chunk-19-1.png" target="_blank">a5d4ca9</a>
-</td>
-<td>
-James Ashmore
-</td>
-<td>
-2021-02-12
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/jma1991/LPMP_NMP/blob/5ea296e7bcf046b2d395bae2689a126cf6281445/docs/figure/01-batch-integration.Rmd/unnamed-chunk-19-1.png" target="_blank">5ea296e</a>
-</td>
-<td>
-James Ashmore
-</td>
-<td>
-2021-02-12
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/jma1991/LPMP_NMP/blob/ff606967f8dfe04a0a1f6e6fed8fa859b78c2b74/docs/figure/01-batch-integration.Rmd/unnamed-chunk-19-1.png" target="_blank">ff60696</a>
-</td>
-<td>
-James Ashmore
-</td>
-<td>
-2021-02-12
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/jma1991/LPMP_NMP/blob/a9d2df432c827ccbd61a2fee4c357122b91a3e0a/docs/figure/01-batch-integration.Rmd/unnamed-chunk-19-1.png" target="_blank">a9d2df4</a>
-</td>
-<td>
-James Ashmore
-</td>
-<td>
-2021-02-12
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/jma1991/LPMP_NMP/blob/ce6499cd3b7b34f2ba5a9aadbc7a5590d0219134/docs/figure/01-batch-integration.Rmd/unnamed-chunk-19-1.png" target="_blank">ce6499c</a>
-</td>
-<td>
-James Ashmore
-</td>
-<td>
-2021-02-12
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<p>Visualize the corrected PCA:</p>
-<pre class="r"><code>ggcells(mnn, aes(corrected.1, corrected.2, colour = cluster)) + 
-  geom_point(size = 1) + 
-  scale_colour_brewer(name = &quot;Cluster&quot;, palette = &quot;Set3&quot;) + 
-  labs(x = &quot;PCA 1&quot;, y = &quot;PCA 2&quot;) + 
-  facet_wrap(~ batch) + 
-  theme_no_axes() + 
-  coord_fixed()</code></pre>
 <p><img src="figure/01-batch-integration.Rmd/unnamed-chunk-20-1.png" width="100%" style="display: block; margin: auto;" /></p>
 <p>
 <button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-20-1">
@@ -1391,6 +1249,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/jma1991/LPMP_NMP/blob/a76d3850273f6b73f9077b0037e0d7820289c554/docs/figure/01-batch-integration.Rmd/unnamed-chunk-20-1.png" target="_blank">a76d385</a>
+</td>
+<td>
+James Ashmore
+</td>
+<td>
+2021-02-12
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/jma1991/LPMP_NMP/blob/a5d4ca9c783bc5c9644a505f387be819d6fa7480/docs/figure/01-batch-integration.Rmd/unnamed-chunk-20-1.png" target="_blank">a5d4ca9</a>
@@ -1439,18 +1308,18 @@ James Ashmore
 </table>
 </div>
 </div>
-<p>Perform TSNE on the corrected PCA matrix:</p>
-<pre class="r"><code>set.seed(0000110000)
+<p>Cluster on the corrected PCA to obtain a partitioning of the cells:</p>
+<pre class="r"><code>snn &lt;- buildSNNGraph(mnn, type = &quot;jaccard&quot;, use.dimred = &quot;corrected&quot;)
 
-mnn &lt;- runTSNE(mnn, dimred = &quot;corrected&quot;)</code></pre>
-<p>Visualize the corrected PCA using a TSNE plot:</p>
-<pre class="r"><code>ggcells(mnn, aes(TSNE.1, TSNE.2, colour = cluster)) +
-  geom_point(size = 1) +
-  scale_colour_brewer(name = &quot;Cluster&quot;, palette = &quot;Set3&quot;) + 
-  labs(x = &quot;TSNE 1&quot;, y = &quot;TSNE 2&quot;) +
-  facet_wrap(~ batch) +
-  theme_no_axes() + 
-  theme(aspect.ratio = 1)</code></pre>
+com &lt;- igraph::cluster_louvain(snn)</code></pre>
+<p>Tabulate number of cells from multiple batches within each cluster:</p>
+<pre class="r"><code>tab &lt;- table(Cluster = com$membership, Batch = mnn$batch)
+
+col &lt;- colorRampPalette(RColorBrewer::brewer.pal(n = 5, name = &quot;Blues&quot;))(100)
+
+brk &lt;- seq(0, max(tab), length.out = 101)
+
+pheatmap(tab, color = col, display_numbers = TRUE, number_format = &quot;%d&quot;, cluster_cols = FALSE, cluster_rows = FALSE, angle_col = 0)</code></pre>
 <p><img src="figure/01-batch-integration.Rmd/unnamed-chunk-22-1.png" width="100%" style="display: block; margin: auto;" /></p>
 <p>
 <button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-22-1">
@@ -1474,6 +1343,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/jma1991/LPMP_NMP/blob/a76d3850273f6b73f9077b0037e0d7820289c554/docs/figure/01-batch-integration.Rmd/unnamed-chunk-22-1.png" target="_blank">a76d385</a>
+</td>
+<td>
+James Ashmore
+</td>
+<td>
+2021-02-12
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/jma1991/LPMP_NMP/blob/a5d4ca9c783bc5c9644a505f387be819d6fa7480/docs/figure/01-batch-integration.Rmd/unnamed-chunk-22-1.png" target="_blank">a5d4ca9</a>
@@ -1522,25 +1402,21 @@ James Ashmore
 </table>
 </div>
 </div>
-<p>Perform UMAP on the corrected PCA matrix:</p>
-<pre class="r"><code>set.seed(1100001001)
-
-mnn &lt;- runUMAP(mnn, dimred = &quot;corrected&quot;)</code></pre>
-<p>Visualize the corrected PCA using a UMAP plot:</p>
-<pre class="r"><code>ggcells(mnn, aes(UMAP.1, UMAP.2, colour = cluster)) +
-  geom_point(size = 1) +
-  scale_colour_brewer(name = &quot;Cluster&quot;, palette = &quot;Set3&quot;) +
-  labs(x = &quot;UMAP 1&quot;, y = &quot;UMAP 2&quot;) +
-  facet_wrap(~ batch) +
+<p>Visualize the corrected PCA:</p>
+<pre class="r"><code>ggcells(mnn, aes(corrected.1, corrected.2, colour = cluster)) + 
+  geom_point(size = 1) + 
+  scale_colour_brewer(name = &quot;Cluster&quot;, palette = &quot;Set3&quot;) + 
+  labs(x = &quot;PCA 1&quot;, y = &quot;PCA 2&quot;) + 
+  facet_wrap(~ batch) + 
   theme_no_axes() + 
-  theme(aspect.ratio = 1)</code></pre>
-<p><img src="figure/01-batch-integration.Rmd/unnamed-chunk-24-1.png" width="100%" style="display: block; margin: auto;" /></p>
+  coord_fixed()</code></pre>
+<p><img src="figure/01-batch-integration.Rmd/unnamed-chunk-23-1.png" width="100%" style="display: block; margin: auto;" /></p>
 <p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-24-1">
-Past versions of unnamed-chunk-24-1.png
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-23-1">
+Past versions of unnamed-chunk-23-1.png
 </button>
 </p>
-<div id="fig-unnamed-chunk-24-1" class="collapse">
+<div id="fig-unnamed-chunk-23-1" class="collapse">
 <div class="table-responsive">
 <table class="table table-condensed table-hover">
 <thead>
@@ -1559,7 +1435,7 @@ Date
 <tbody>
 <tr>
 <td>
-<a href="https://github.com/jma1991/LPMP_NMP/blob/a5d4ca9c783bc5c9644a505f387be819d6fa7480/docs/figure/01-batch-integration.Rmd/unnamed-chunk-24-1.png" target="_blank">a5d4ca9</a>
+<a href="https://github.com/jma1991/LPMP_NMP/blob/a9d2df432c827ccbd61a2fee4c357122b91a3e0a/docs/figure/01-batch-integration.Rmd/unnamed-chunk-23-1.png" target="_blank">a9d2df4</a>
 </td>
 <td>
 James Ashmore
@@ -1570,41 +1446,45 @@ James Ashmore
 </tr>
 <tr>
 <td>
-<a href="https://github.com/jma1991/LPMP_NMP/blob/91257ffa9a7718a7fd61346fe60036dc3ab5dc1e/docs/figure/01-batch-integration.Rmd/unnamed-chunk-24-1.png" target="_blank">91257ff</a>
+<a href="https://github.com/jma1991/LPMP_NMP/blob/193e87332dc4d91eb1c82961c48c23cab33ff3f2/docs/figure/01-batch-integration.Rmd/unnamed-chunk-23-1.png" target="_blank">193e873</a>
 </td>
 <td>
 James Ashmore
 </td>
 <td>
-2021-02-12
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/jma1991/LPMP_NMP/blob/5ea296e7bcf046b2d395bae2689a126cf6281445/docs/figure/01-batch-integration.Rmd/unnamed-chunk-24-1.png" target="_blank">5ea296e</a>
-</td>
-<td>
-James Ashmore
-</td>
-<td>
-2021-02-12
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/jma1991/LPMP_NMP/blob/ff606967f8dfe04a0a1f6e6fed8fa859b78c2b74/docs/figure/01-batch-integration.Rmd/unnamed-chunk-24-1.png" target="_blank">ff60696</a>
-</td>
-<td>
-James Ashmore
-</td>
-<td>
-2021-02-12
+2021-02-04
 </td>
 </tr>
 </tbody>
 </table>
 </div>
 </div>
+<p>Perform TSNE on the corrected PCA matrix:</p>
+<pre class="r"><code>set.seed(0000110000)
+
+mnn &lt;- runTSNE(mnn, dimred = &quot;corrected&quot;)</code></pre>
+<p>Visualize the corrected PCA using a TSNE plot:</p>
+<pre class="r"><code>ggcells(mnn, aes(TSNE.1, TSNE.2, colour = cluster)) +
+  geom_point(size = 1) +
+  scale_colour_brewer(name = &quot;Cluster&quot;, palette = &quot;Set3&quot;) + 
+  labs(x = &quot;TSNE 1&quot;, y = &quot;TSNE 2&quot;) +
+  facet_wrap(~ batch) +
+  theme_no_axes() + 
+  theme(aspect.ratio = 1)</code></pre>
+<p><img src="figure/01-batch-integration.Rmd/unnamed-chunk-25-1.png" width="100%" style="display: block; margin: auto;" /></p>
+<p>Perform UMAP on the corrected PCA matrix:</p>
+<pre class="r"><code>set.seed(1100001001)
+
+mnn &lt;- runUMAP(mnn, dimred = &quot;corrected&quot;)</code></pre>
+<p>Visualize the corrected PCA using a UMAP plot:</p>
+<pre class="r"><code>ggcells(mnn, aes(UMAP.1, UMAP.2, colour = cluster)) +
+  geom_point(size = 1) +
+  scale_colour_brewer(name = &quot;Cluster&quot;, palette = &quot;Set3&quot;) +
+  labs(x = &quot;UMAP 1&quot;, y = &quot;UMAP 2&quot;) +
+  facet_wrap(~ batch) +
+  theme_no_axes() + 
+  theme(aspect.ratio = 1)</code></pre>
+<p><img src="figure/01-batch-integration.Rmd/unnamed-chunk-27-1.png" width="100%" style="display: block; margin: auto;" /></p>
 </div>
 <div id="summary" class="section level2">
 <h2>Summary</h2>
