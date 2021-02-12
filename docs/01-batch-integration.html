@@ -556,16 +556,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomjma1991LPMPNMPtreeae8e3f651aba0223f9568f2be6cdc426930d83eftargetblankae8e3f6a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/jma1991/LPMP_NMP/tree/ae8e3f651aba0223f9568f2be6cdc426930d83ef" target="_blank">ae8e3f6</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomjma1991LPMPNMPtree3438d90471807810c9c7e15e8d43d0286284267atargetblank3438d90a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/jma1991/LPMP_NMP/tree/3438d90471807810c9c7e15e8d43d0286284267a" target="_blank">3438d90</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomjma1991LPMPNMPtreeae8e3f651aba0223f9568f2be6cdc426930d83eftargetblankae8e3f6a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomjma1991LPMPNMPtree3438d90471807810c9c7e15e8d43d0286284267atargetblank3438d90a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/jma1991/LPMP_NMP/tree/ae8e3f651aba0223f9568f2be6cdc426930d83ef" target="_blank">ae8e3f6</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/jma1991/LPMP_NMP/tree/3438d90471807810c9c7e15e8d43d0286284267a" target="_blank">3438d90</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -615,6 +615,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/jma1991/LPMP_NMP/blob/3438d90471807810c9c7e15e8d43d0286284267a/analysis/01-batch-integration.Rmd" target="_blank">3438d90</a>
+</td>
+<td>
+James Ashmore
+</td>
+<td>
+2021-02-12
+</td>
+<td>
+Build
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/jma1991/LPMP_NMP/5ea296e7bcf046b2d395bae2689a126cf6281445/docs/01-batch-integration.html" target="_blank">5ea296e</a>
+</td>
+<td>
+James Ashmore
+</td>
+<td>
+2021-02-12
+</td>
+<td>
+Build
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -1093,7 +1127,7 @@ James Ashmore
 <p>Visualize the corrected PCA:</p>
 <pre class="r"><code>ggcells(mnn, aes(corrected.1, corrected.2, colour = cluster)) + 
   geom_point(size = 1) + 
-  scale_colour_brewer(name = &quot;Cluster&quot;, palette = &quot;Set1&quot;) + 
+  scale_colour_brewer(name = &quot;Cluster&quot;, palette = &quot;Set3&quot;) + 
   labs(x = &quot;PCA 1&quot;, y = &quot;PCA 2&quot;) + 
   facet_wrap(~ batch) + 
   theme_no_axes() + 
@@ -1123,6 +1157,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/jma1991/LPMP_NMP/blob/5ea296e7bcf046b2d395bae2689a126cf6281445/docs/figure/01-batch-integration.Rmd/unnamed-chunk-20-1.png" target="_blank">5ea296e</a>
+</td>
+<td>
+James Ashmore
+</td>
+<td>
+2021-02-12
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/jma1991/LPMP_NMP/blob/ff606967f8dfe04a0a1f6e6fed8fa859b78c2b74/docs/figure/01-batch-integration.Rmd/unnamed-chunk-20-1.png" target="_blank">ff60696</a>
 </td>
 <td>
@@ -1143,7 +1188,7 @@ mnn &lt;- runTSNE(mnn, dimred = &quot;corrected&quot;)</code></pre>
 <p>Visualize the corrected PCA using a TSNE plot:</p>
 <pre class="r"><code>ggcells(mnn, aes(TSNE.1, TSNE.2, colour = cluster)) +
   geom_point(size = 1) +
-  scale_colour_brewer(name = &quot;Cluster&quot;, palette = &quot;Set1&quot;) + 
+  scale_colour_brewer(name = &quot;Cluster&quot;, palette = &quot;Set3&quot;) + 
   labs(x = &quot;TSNE 1&quot;, y = &quot;TSNE 2&quot;) +
   facet_wrap(~ batch) +
   theme_no_axes() + 
@@ -1173,6 +1218,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/jma1991/LPMP_NMP/blob/5ea296e7bcf046b2d395bae2689a126cf6281445/docs/figure/01-batch-integration.Rmd/unnamed-chunk-22-1.png" target="_blank">5ea296e</a>
+</td>
+<td>
+James Ashmore
+</td>
+<td>
+2021-02-12
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/jma1991/LPMP_NMP/blob/ff606967f8dfe04a0a1f6e6fed8fa859b78c2b74/docs/figure/01-batch-integration.Rmd/unnamed-chunk-22-1.png" target="_blank">ff60696</a>
 </td>
 <td>
@@ -1193,7 +1249,7 @@ mnn &lt;- runUMAP(mnn, dimred = &quot;corrected&quot;)</code></pre>
 <p>Visualize the corrected PCA using a UMAP plot:</p>
 <pre class="r"><code>ggcells(mnn, aes(UMAP.1, UMAP.2, colour = cluster)) +
   geom_point(size = 1) +
-  scale_colour_brewer(name = &quot;Cluster&quot;, palette = &quot;Set1&quot;) +
+  scale_colour_brewer(name = &quot;Cluster&quot;, palette = &quot;Set3&quot;) +
   labs(x = &quot;UMAP 1&quot;, y = &quot;UMAP 2&quot;) +
   facet_wrap(~ batch) +
   theme_no_axes() + 
@@ -1221,6 +1277,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/jma1991/LPMP_NMP/blob/5ea296e7bcf046b2d395bae2689a126cf6281445/docs/figure/01-batch-integration.Rmd/unnamed-chunk-24-1.png" target="_blank">5ea296e</a>
+</td>
+<td>
+James Ashmore
+</td>
+<td>
+2021-02-12
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/jma1991/LPMP_NMP/blob/ff606967f8dfe04a0a1f6e6fed8fa859b78c2b74/docs/figure/01-batch-integration.Rmd/unnamed-chunk-24-1.png" target="_blank">ff60696</a>
