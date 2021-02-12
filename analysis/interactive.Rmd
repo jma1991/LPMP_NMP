@@ -282,79 +282,79 @@ Allocate more memory to the iSEE application:
 configureApp(appName = "LPMP_NMP_ATLAS", appDir = "shiny/atlas", size = "xxxlarge")
 ```
 
-### Human data
+<!-- ### Human data -->
 
-Create iSEE directory for human data:
+<!-- Create iSEE directory for human data: -->
 
-```{r}
-dir.create("shiny/human", showWarnings = FALSE, mode = "0755")
-```
+<!-- ```{r} -->
+<!-- dir.create("shiny/human", showWarnings = FALSE, mode = "0755") -->
+<!-- ``` -->
 
-Copy human data to iSEE directory:
+<!-- Copy human data to iSEE directory: -->
 
-```{r}
-file.copy("output/03-human-integration.rds", "shiny/human/data.rds", overwrite = TRUE)
-```
+<!-- ```{r} -->
+<!-- file.copy("output/03-human-integration.rds", "shiny/human/data.rds", overwrite = TRUE) -->
+<!-- ``` -->
 
-Write code to iSEE application file:
+<!-- Write code to iSEE application file: -->
 
-```{cat, engine.opts = list(file = "shiny/human/app.R"), class.source = "r"}
-# Load required packages
-library(iSEE)
-library(SingleCellExperiment)
-library(BiocSingular)
+<!-- ```{cat, engine.opts = list(file = "shiny/human/app.R"), class.source = "r"} -->
+<!-- # Load required packages -->
+<!-- library(iSEE) -->
+<!-- library(SingleCellExperiment) -->
+<!-- library(BiocSingular) -->
 
-# Load experiment object
-sce <- readRDS("data.rds")
+<!-- # Load experiment object -->
+<!-- sce <- readRDS("data.rds") -->
 
-# Make feature names unique
-rownames(sce) <- scuttle::uniquifyFeatureNames(rowData(sce)$Mouse_ID, rowData(sce)$Mouse_Symbol)
+<!-- # Make feature names unique -->
+<!-- rownames(sce) <- scuttle::uniquifyFeatureNames(rowData(sce)$Mouse_ID, rowData(sce)$Mouse_Symbol) -->
 
-# Define column data variables
-sce$Etv2 <- counts(sce)["Etv2", ] > 0
-sce$Kdr <- counts(sce)["Kdr", ] > 0
-sce$Runx1 <- counts(sce)["Runx1", ] > 0
-sce$Ednrb <- counts(sce)["Ednrb", ] > 0
-sce$Etv2_AND_Kdr <- sce$Etv2 & sce$Kdr
-sce$Etv2_AND_Kdr_AND_Runx1 <- sce$Etv2_AND_Kdr & sce$Runx1
-sce$Etv2_AND_Ednrb <- sce$Etv2 & sce$Ednrb
+<!-- # Define column data variables -->
+<!-- sce$Etv2 <- counts(sce)["Etv2", ] > 0 -->
+<!-- sce$Kdr <- counts(sce)["Kdr", ] > 0 -->
+<!-- sce$Runx1 <- counts(sce)["Runx1", ] > 0 -->
+<!-- sce$Ednrb <- counts(sce)["Ednrb", ] > 0 -->
+<!-- sce$Etv2_AND_Kdr <- sce$Etv2 & sce$Kdr -->
+<!-- sce$Etv2_AND_Kdr_AND_Runx1 <- sce$Etv2_AND_Kdr & sce$Runx1 -->
+<!-- sce$Etv2_AND_Ednrb <- sce$Etv2 & sce$Ednrb -->
 
-# Define column data colours
-boolean_colours <- function(n) {
-  c(
-    "TRUE" = "#E15759",
-    "FALSE" = "#BAB0AC"
-  )
-}
+<!-- # Define column data colours -->
+<!-- boolean_colours <- function(n) { -->
+<!--   c( -->
+<!--     "TRUE" = "#E15759", -->
+<!--     "FALSE" = "#BAB0AC" -->
+<!--   ) -->
+<!-- } -->
 
-# Create colour map
-ecm <- ExperimentColorMap(
-  colData = list(
-    Etv2 = boolean_colours,
-    Kdr = boolean_colours,
-    Runx1 = boolean_colours,
-    Ednrb = boolean_colours,
-    Etv2_AND_Kdr = boolean_colours,
-    Etv2_AND_Kdr_AND_Runx1 = boolean_colours,
-    Etv2_AND_Ednrb = boolean_colours
-  )
-)
+<!-- # Create colour map -->
+<!-- ecm <- ExperimentColorMap( -->
+<!--   colData = list( -->
+<!--     Etv2 = boolean_colours, -->
+<!--     Kdr = boolean_colours, -->
+<!--     Runx1 = boolean_colours, -->
+<!--     Ednrb = boolean_colours, -->
+<!--     Etv2_AND_Kdr = boolean_colours, -->
+<!--     Etv2_AND_Kdr_AND_Runx1 = boolean_colours, -->
+<!--     Etv2_AND_Ednrb = boolean_colours -->
+<!--   ) -->
+<!-- ) -->
 
-# Create iSEE object
-iSEE(sce, appTitle = "LPMP_NMP_HUMAN", colormap = ecm)
-```
+<!-- # Create iSEE object -->
+<!-- iSEE(sce, appTitle = "LPMP_NMP_HUMAN", colormap = ecm) -->
+<!-- ``` -->
 
-Deploy the iSEE application to the shiny server:
+<!-- Deploy the iSEE application to the shiny server: -->
 
-```{r}
-deployApp(appDir = "shiny/human", appName = "LPMP_NMP_HUMAN", appTitle = "LPMP_NMP_HUMAN", launch.browser = FALSE, forceUpdate = TRUE)
-```
+<!-- ```{r} -->
+<!-- deployApp(appDir = "shiny/human", appName = "LPMP_NMP_HUMAN", appTitle = "LPMP_NMP_HUMAN", launch.browser = FALSE, forceUpdate = TRUE) -->
+<!-- ``` -->
 
-Allocate more memory to the iSEE application:
+<!-- Allocate more memory to the iSEE application: -->
 
-```{r}
-configureApp(appName = "LPMP_NMP_HUMAN", appDir = "shiny/human", size = "xxlarge")
-```
+<!-- ```{r} -->
+<!-- configureApp(appName = "LPMP_NMP_HUMAN", appDir = "shiny/human", size = "xxlarge") -->
+<!-- ``` -->
 
 ## Summary
 
