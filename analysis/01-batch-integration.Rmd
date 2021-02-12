@@ -52,6 +52,7 @@ Read experiment objects:
 
 ```{r}
 sce <- list(
+  NMP_EHF = readRDS("data/NMP_EHF.rds"),
   LPMP_EHF = readRDS("data/LPMP_EHF.rds"),
   LPMP_LHF = readRDS("data/LPMP_LHF.rds")
 )
