@@ -198,8 +198,8 @@ Create annotation:
 ```{r}
 ann <- list(
   row = data.frame(Marker = ids$lineage, row.names = ids$gene_id),
-  col = data.frame(Cluster = sce$cluster_integrated, Stage = sce$stage, row.names = colnames(sce)),
-  colors = list(Cluster = cluster.palette, Stage = stage.palette, Marker = marker.palette)
+  col = data.frame(Cluster = sce$cluster_integrated, Batch = sce$batch, row.names = colnames(sce)),
+  colors = list(Cluster = cluster.palette, Batch = batch.palette, Marker = marker.palette)
 )
 ```
 
