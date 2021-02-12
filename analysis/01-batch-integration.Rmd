@@ -222,7 +222,7 @@ Visualize the corrected PCA:
 ```{r}
 ggcells(mnn, aes(corrected.1, corrected.2, colour = cluster)) + 
   geom_point(size = 1) + 
-  scale_colour_brewer(name = "Cluster", palette = "Set1") + 
+  scale_colour_brewer(name = "Cluster", palette = "Set3") + 
   labs(x = "PCA 1", y = "PCA 2") + 
   facet_wrap(~ batch) + 
   theme_no_axes() + 
@@ -242,7 +242,7 @@ Visualize the corrected PCA using a TSNE plot:
 ```{r}
 ggcells(mnn, aes(TSNE.1, TSNE.2, colour = cluster)) +
   geom_point(size = 1) +
-  scale_colour_brewer(name = "Cluster", palette = "Set1") + 
+  scale_colour_brewer(name = "Cluster", palette = "Set3") + 
   labs(x = "TSNE 1", y = "TSNE 2") +
   facet_wrap(~ batch) +
   theme_no_axes() + 
@@ -262,7 +262,7 @@ Visualize the corrected PCA using a UMAP plot:
 ```{r}
 ggcells(mnn, aes(UMAP.1, UMAP.2, colour = cluster)) +
   geom_point(size = 1) +
-  scale_colour_brewer(name = "Cluster", palette = "Set1") +
+  scale_colour_brewer(name = "Cluster", palette = "Set3") +
   labs(x = "UMAP 1", y = "UMAP 2") +
   facet_wrap(~ batch) +
   theme_no_axes() + 
