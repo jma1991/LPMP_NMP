@@ -81,10 +81,10 @@ marker.palette <- c(
   "Primitive streak" = "#c85979"
 )
 
-batch.palette <- c(
-  "NMP_EHF" = "#FF684C",
-  "LPMP_EHF" = "#FFDA66",
-  "LPMP_LHF" = "#8ACE7E"
+plate.palette <- c(
+  "NMP_EHF_C" = "#FF684C",
+  "LPMP_EHF_B" = "#FFDA66",
+  "LPMP_LHF_C" = "#8ACE7E"
 )
 ```
 
@@ -157,8 +157,8 @@ Create annotation:
 ```{r}
 ann <- list(
   row = data.frame(Marker = ids$lineage, row.names = ids$gene_id),
-  col = data.frame(Cluster = sce$cluster_integrated, Batch = sce$batch, row.names = colnames(sce)),
-  colors = list(Cluster = cluster.palette, Batch = batch.palette, Marker = marker.palette)
+  col = data.frame(Cluster = sce$cluster_integrated, Plate = sce$plate, row.names = colnames(sce)),
+  colors = list(Cluster = cluster.palette, Plate = plate.palette, Marker = marker.palette)
 )
 ```
 
@@ -198,8 +198,8 @@ Create annotation:
 ```{r}
 ann <- list(
   row = data.frame(Marker = ids$lineage, row.names = ids$gene_id),
-  col = data.frame(Cluster = sce$cluster_integrated, Batch = sce$batch, row.names = colnames(sce)),
-  colors = list(Cluster = cluster.palette, Batch = batch.palette, Marker = marker.palette)
+  col = data.frame(Cluster = sce$cluster_integrated, Plate = sce$plate, row.names = colnames(sce)),
+  colors = list(Cluster = cluster.palette, Plate = plate.palette, Marker = marker.palette)
 )
 ```
 
