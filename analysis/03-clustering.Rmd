@@ -180,7 +180,7 @@ patchwork::wrap_plots(plt)
 Perform k-means clustering on the PCA matrix:
 
 ```{r}
-set.seed(1010011101)
+set.seed(1100011000)
 
 dim <- reducedDim(sce, "corrected")
 
@@ -204,7 +204,7 @@ ggplot(dat, aes(var, val)) +
 Select optimal number of clusters:
 
 ```{r}
-set.seed(1010011101)
+set.seed(1100011000)
 
 cls <- kmeans(dim, centers = num)
 
