@@ -19,10 +19,8 @@ navbar:
           href: 04-marker-detection.html
     - text: "Analysis"
       menu:
-        - text: "Atlas integration"
-          href: atlas-integration.html
-        - text: "Human integration"
-          href: human-integration.html
+        - text: "Lineage markers"
+          href: lineage-markers.html
     - text: "Interactive"
       href: interactive.html
   right:
