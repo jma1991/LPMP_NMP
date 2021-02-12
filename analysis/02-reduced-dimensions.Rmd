@@ -114,7 +114,7 @@ ggplot(dat, aes(n.pcs, n.clusters)) +
 Choose number of PCs to retain from the above analyses:
 
 ```{r}
-idx <- seq_len(5)
+idx <- seq_len(10)
 
 reducedDim(sce, "corrected") <- reducedDim(sce, "corrected")[, idx]
 ```
@@ -182,7 +182,7 @@ Select optimal perplexity value and number of iterations:
 ```{r}
 set.seed(1101000110)
 
-sce <- runTSNE(sce, dimred = "corrected", perplexity = 50, max_iter = 700)
+sce <- runTSNE(sce, dimred = "corrected", perplexity = 41, max_iter = 500)
 ```
 
 ## UMAP
@@ -230,7 +230,7 @@ Select optimal number of nearest neighbors:
 ```{r}
 set.seed(0000100110)
 
-sce <- runUMAP(sce, dimred = "corrected", n_neighbors = 60, min_dist = 0.2)
+sce <- runUMAP(sce, dimred = "corrected", n_neighbors = 41, min_dist = 0.4)
 ```
 
 ## Variables {.tabset}
