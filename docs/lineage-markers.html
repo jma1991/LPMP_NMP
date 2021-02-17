@@ -440,7 +440,7 @@ div.tocify {
 
 <h1 class="title toc-ignore">Lineage markers</h1>
 <h4 class="author">James Ashmore</h4>
-<h4 class="date">12 February, 2021</h4>
+<h4 class="date">17 February, 2021</h4>
 
 </div>
 
@@ -465,7 +465,7 @@ div.tocify {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2021-02-12
+<strong>Last updated:</strong> 2021-02-17
 </p>
 <p>
 <strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
@@ -556,16 +556,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomjma1991LPMPNMPtree647de1b7179aa847850d37aa973ffd7cfcc65f31targetblank647de1ba"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/jma1991/LPMP_NMP/tree/647de1b7179aa847850d37aa973ffd7cfcc65f31" target="_blank">647de1b</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomjma1991LPMPNMPtree66a74902462faf9e3d597e1f7a03368339bb0d1dtargetblank66a7490a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/jma1991/LPMP_NMP/tree/66a74902462faf9e3d597e1f7a03368339bb0d1d" target="_blank">66a7490</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomjma1991LPMPNMPtree647de1b7179aa847850d37aa973ffd7cfcc65f31targetblank647de1ba" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomjma1991LPMPNMPtree66a74902462faf9e3d597e1f7a03368339bb0d1dtargetblank66a7490a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/jma1991/LPMP_NMP/tree/647de1b7179aa847850d37aa973ffd7cfcc65f31" target="_blank">647de1b</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/jma1991/LPMP_NMP/tree/66a74902462faf9e3d597e1f7a03368339bb0d1d" target="_blank">66a7490</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -621,6 +621,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/jma1991/LPMP_NMP/blob/66a74902462faf9e3d597e1f7a03368339bb0d1d/analysis/lineage-markers.Rmd" target="_blank">66a7490</a>
+</td>
+<td>
+James Ashmore
+</td>
+<td>
+2021-02-17
+</td>
+<td>
+Build
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/jma1991/LPMP_NMP/f9ffeb4b59ff3ad4ccfef2c794eb0b8c6548b636/docs/lineage-markers.html" target="_blank">f9ffeb4</a>
+</td>
+<td>
+James Ashmore
+</td>
+<td>
+2021-02-12
+</td>
+<td>
+Build
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -785,7 +819,7 @@ library(scran)</code></pre>
 <p>Read experiment data:</p>
 <pre class="r"><code>sce &lt;- readRDS(&quot;output/04-marker-detection.rds&quot;)
 
-sce &lt;- sce[, order(sce$cluster_integrated)]</code></pre>
+sce &lt;- sce[, order(sce$cluster_integrated, sce$phase)]</code></pre>
 <p>Read marker data:</p>
 <pre class="r"><code>ids &lt;- read.csv(&quot;data/lineage-markers.csv&quot;)</code></pre>
 <p>Make feature names unique:</p>
@@ -797,9 +831,7 @@ sce &lt;- sce[, order(sce$cluster_integrated)]</code></pre>
   &quot;3&quot; = &quot;#E15759&quot;,
   &quot;4&quot; = &quot;#76B7B2&quot;,
   &quot;5&quot; = &quot;#59A14F&quot;,
-  &quot;6&quot; = &quot;#EDC948&quot;,
-  &quot;7&quot; = &quot;#B07AA1&quot;,
-  &quot;8&quot; = &quot;#FF9DA7&quot;
+  &quot;6&quot; = &quot;#EDC948&quot;
 )
 
 marker.palette &lt;- c(
@@ -816,6 +848,13 @@ plate.palette &lt;- c(
   &quot;NMP_EHF_C&quot; = &quot;#FF684C&quot;,
   &quot;LPMP_EHF_B&quot; = &quot;#FFDA66&quot;,
   &quot;LPMP_LHF_C&quot; = &quot;#8ACE7E&quot;
+)
+
+
+phase.palette &lt;- c(
+  &quot;G1&quot; = &quot;#F1788D&quot;,
+  &quot;G2M&quot; = &quot;#00A2B3&quot;,
+  &quot;S&quot; = &quot;#BFB202&quot;
 )</code></pre>
 <p>Define helper functions:</p>
 <pre class="r"><code>pheatmap.mat &lt;- function(x) {
@@ -877,8 +916,8 @@ mat.z &lt;- pheatmap.mat(mat.x)</code></pre>
 <p>Create annotation:</p>
 <pre class="r"><code>ann &lt;- list(
   row = data.frame(Marker = ids$lineage, row.names = ids$gene_id),
-  col = data.frame(Cluster = sce$cluster_integrated, Plate = sce$plate, row.names = colnames(sce)),
-  colors = list(Cluster = cluster.palette, Plate = plate.palette, Marker = marker.palette)
+  col = data.frame(Cluster = sce$cluster_integrated, Plate = sce$plate, Phase = sce$phase, row.names = colnames(sce)),
+  colors = list(Cluster = cluster.palette, Plate = plate.palette, Phase = phase.palette, Marker = marker.palette)
 )</code></pre>
 <p>Plot expression heatmap:</p>
 <pre class="r"><code>pheatmap(
@@ -920,6 +959,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/jma1991/LPMP_NMP/blob/f9ffeb4b59ff3ad4ccfef2c794eb0b8c6548b636/docs/figure/lineage-markers.Rmd/unnamed-chunk-11-1.png" target="_blank">f9ffeb4</a>
+</td>
+<td>
+James Ashmore
+</td>
+<td>
+2021-02-12
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/jma1991/LPMP_NMP/blob/40b83e323ffb82a1a7c624223ab1ebd36dde3a55/docs/figure/lineage-markers.Rmd/unnamed-chunk-11-1.png" target="_blank">40b83e3</a>
@@ -999,6 +1049,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/jma1991/LPMP_NMP/blob/f9ffeb4b59ff3ad4ccfef2c794eb0b8c6548b636/docs/figure/lineage-markers.Rmd/unnamed-chunk-14-1.png" target="_blank">f9ffeb4</a>
+</td>
+<td>
+James Ashmore
+</td>
+<td>
+2021-02-12
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/jma1991/LPMP_NMP/blob/40b83e323ffb82a1a7c624223ab1ebd36dde3a55/docs/figure/lineage-markers.Rmd/unnamed-chunk-14-1.png" target="_blank">40b83e3</a>
