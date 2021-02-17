@@ -42,7 +42,7 @@ Read experiment data:
 ```{r}
 sce <- readRDS("output/04-marker-detection.rds")
 
-sce <- sce[, order(sce$cluster_integrated)]
+sce <- sce[, order(sce$cluster_integrated, sce$phase)]
 ```
 
 Read marker data:
@@ -66,9 +66,7 @@ cluster.palette <- c(
   "3" = "#E15759",
   "4" = "#76B7B2",
   "5" = "#59A14F",
-  "6" = "#EDC948",
-  "7" = "#B07AA1",
-  "8" = "#FF9DA7"
+  "6" = "#EDC948"
 )
 
 marker.palette <- c(
@@ -85,6 +83,13 @@ plate.palette <- c(
   "NMP_EHF_C" = "#FF684C",
   "LPMP_EHF_B" = "#FFDA66",
   "LPMP_LHF_C" = "#8ACE7E"
+)
+
+
+phase.palette <- c(
+  "G1" = "#F1788D",
+  "G2M" = "#00A2B3",
+  "S" = "#BFB202"
 )
 ```
 
@@ -157,8 +162,8 @@ Create annotation:
 ```{r}
 ann <- list(
   row = data.frame(Marker = ids$lineage, row.names = ids$gene_id),
-  col = data.frame(Cluster = sce$cluster_integrated, Plate = sce$plate, row.names = colnames(sce)),
-  colors = list(Cluster = cluster.palette, Plate = plate.palette, Marker = marker.palette)
+  col = data.frame(Cluster = sce$cluster_integrated, Plate = sce$plate, Phase = sce$phase, row.names = colnames(sce)),
+  colors = list(Cluster = cluster.palette, Plate = plate.palette, Phase = phase.palette, Marker = marker.palette)
 )
 ```
 
