@@ -19,6 +19,10 @@ navbar:
           href: 04-marker-detection.html
     - text: "Analysis"
       menu:
+        - text: "Mouse integration"
+          href: mouse-integration.html
+        - text: "Human integration"
+          href: human-integration.html
         - text: "Lineage markers"
           href: lineage-markers.html
     - text: "Interactive"
