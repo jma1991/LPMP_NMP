@@ -18,7 +18,7 @@ knitr::opts_chunk$set(
   autodep    = TRUE,
   cache      = TRUE,
   cache.lazy = FALSE,
-  cache.path = "cache/03-human-integration.Rmd/",
+  cache.path = "cache/human-integration.Rmd/",
   dev        = "png",
   error      = FALSE,
   message    = FALSE,
@@ -282,7 +282,7 @@ all <- multiBatchNorm(all)
 Correct experiments using nearest neighbours:
 
 ```{r}
-set.seed(1000110100)
+set.seed(1111001110)
 
 mnn <- correctExperiments(
   all,
@@ -347,7 +347,7 @@ pheatmap(tab, color = col, display_numbers = TRUE, number_format = "%d", cluster
 Perform UMAP on the corrected PCA matrix:
 
 ```{r}
-set.seed(0001000010)
+set.seed(1100111110)
 
 mnn <- runUMAP(mnn, dimred = "corrected", n_neighbors = 15, min_dist = 0.5) # same settings as reference analysis
 ```
@@ -390,7 +390,7 @@ ggplot(dat, aes(UMAP.1, UMAP.2, colour = Cluster)) +
 Save integrated experiment object to disk:
 
 ```{r}
-saveRDS(mnn, file = "output/03-human-integration.rds")
+saveRDS(mnn, file = "output/human-integration.rds")
 ```
 
 ### Session
