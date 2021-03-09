@@ -1,5 +1,5 @@
 ---
-title: "Atlas integration"
+title: "Mouse integration"
 author: "James Ashmore"
 date: "`r format(Sys.time(), '%d %B, %Y')`"
 output: workflowr::wflow_html
@@ -18,7 +18,7 @@ knitr::opts_chunk$set(
   autodep    = TRUE,
   cache      = TRUE,
   cache.lazy = FALSE,
-  cache.path = "cache/atlas-integration.Rmd/",
+  cache.path = "cache/mouse-integration.Rmd/",
   dev        = "png",
   error      = FALSE,
   message    = FALSE,
@@ -193,7 +193,7 @@ idx <- c(idx$sample, "LPMP_LHF", "LPMP_EHF", "NMP_EHF")
 Correct experiments using nearest neighbours:
 
 ```{r}
-set.seed(1111001101)
+set.seed(1000010100)
 
 mnn <- correctExperiments(
   all,
@@ -280,7 +280,7 @@ pheatmap(tab[, idx], color = col, display_numbers = TRUE, number_format = "%d", 
 Perform TSNE on the corrected PCA matrix:
 
 ```{r}
-set.seed(1101111001)
+set.seed(0100010110)
 
 mnn <- runTSNE(mnn, dimred = "corrected", perplexity = 120) # same settings as reference analysis
 ```
@@ -300,7 +300,7 @@ ggcells(mnn, aes(TSNE.1, TSNE.2, colour = celltype)) +
 Perform UMAP on the corrected PCA matrix:
 
 ```{r}
-set.seed(0010111101)
+set.seed(1001011000)
 
 mnn <- runUMAP(mnn, dimred = "corrected", n_neighbors = 20, min_dist = 0.7) # same settings as reference analysis
 ```
@@ -324,7 +324,7 @@ ggcells(mnn, aes(UMAP.1, UMAP.2, colour = celltype)) +
 Save integrated experiment object to disk:
 
 ```{r}
-saveRDS(mnn, file = "output/atlas-integration.rds")
+saveRDS(mnn, file = "output/mouse-integration.rds")
 ```
 
 ### Session
